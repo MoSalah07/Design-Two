@@ -1,0 +1,207 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap');
+/*=== Global Rules ======= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    /* here for testing => when sidebar.close i found color white => because i changed background-color */
+    background-color: var(--main-Back);
+}
+ul { list-style: none;}
+a { text-decoration: none;}
+i {
+    user-select: none;
+}
+:root {
+    --main-Back: #11101d;
+    --alt-back: #1d1b31;
+    --white-back: #e4e9f7;
+    --main-transition: .4s;
+}
+/*==================================== sidebar ======================================== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 170px;
+    background-color: var(--main-Back);
+    transition: all var(--main-transition);
+}
+.sidebar.close {
+    width: 70px;
+    height: 100%;
+}
+.sidebar .logo {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar .logo > i {
+    height: 50px;
+    min-width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white-back);
+    cursor: pointer;
+}
+.sidebar .main-list {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-Back);
+    padding-top: 3rem;
+}
+
+.sidebar .main-list > li {
+    position: relative;
+    transition: all var(--main-transition) ease;
+    padding: 1.2rem 0;
+}
+
+.sidebar .main-list > li  a {
+    display: flex;
+    align-items: center;
+    transition: all var(--main-transition) ease;
+}
+/* leh f line => 74 == 3lshan w ana b3ml hover 3la >> a inside line ==> 68  => w5da 7agm kber kda chagned it le block  */
+.sidebar.close .main-list > li > a {
+    display: block;
+    min-width: 70px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+} 
+.sidebar .main-list > li:hover a{
+    background-color: var(--alt-back);
+}
+.sidebar .main-list li a .list-icon {
+    min-width: 70px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2rem;
+}
+.sidebar .main-list li a .main-title {
+    color: #fff;
+    font-size: 15px;
+    text-transform: capitalize;
+    opacity: 1;
+    /* هنا لازم يكون اقل من ==> transition you can see Line ==> 31 */
+    transition: opacity .1s;
+    min-width: 70px;
+}
+.sidebar.close .main-list li a .main-title {
+    opacity: 0;
+    display: none;
+}
+.sidebar .main-list li .sub-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--alt-back);
+    padding: 1rem;
+    /* hena display none => 3lshan transition  */
+    display: none;
+}
+.sidebar.close .main-list li .sub-list {
+    position: absolute;
+    left: 100%;
+    top: 40%;
+    transform: translateY(-50%);
+    display: flex;
+    padding: .5rem .8rem;
+    border-radius: 0px 6px 6px 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--main-transition);
+}
+.sidebar.close .main-list li:hover .sub-list {
+    opacity: 1;
+    pointer-events: auto;
+    top: 50%;
+}
+.sidebar.close .main-list li .sub-list a.main-title {
+    color: #fff;
+    white-space: nowrap;
+}
+/* ================== Start Main ========================= */
+.sidebar.close ~ main {
+    left: 70px;
+    width: calc(100% - 70px);
+}
+main {
+    /* here position fixed ===> because i use postion relative i found scrolling x  */
+    position: fixed;
+    /* here z-index: -1 => beacuse sub-list => a.main-title => visible  */
+    z-index: -1;
+    height: 100vh;
+    transition: all .5s;
+    left: 170px;
+    /* here 100% + 170px not (-) ==> here i need fill full screen beacuse i used 100% + 170px */
+    width: calc(100% + 170px); 
+    background-color: #191919;
+}
+main .container {
+    padding-inline: 1.5rem;
+    margin-inline: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    /* For Testing  Width*/
+    width: calc(100% - 3rem);
+}
+main .container .inner-card h3.title-card {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* For Test Same line ==> 170 */
+    width: 250px;
+}
+/* dh el icon inside ==> Card 3 dots ==> ... */
+main .container .inner-card h3.title-card > i {
+    color: #696961;
+    cursor: pointer;
+}
+main .container .inner-card .info-card {
+    width: 250px;
+    height: 150px;
+    border-radius: 10px;
+    /* For Testing */
+    background-image: linear-gradient(333deg, #947385 , #346778, #535e82 , #a288ff83 );
+    padding: 1rem;
+    margin-top: 1rem;
+    transition: all var(--main-transition);
+    /* Testing ==> But Important for Trasnition ==> hide-info */
+    overflow: hidden;
+}
+/* From Line 185 To line 193  => Toggle Class With Js ==> hide-info */
+main .container .inner-card .info-card.hide-info {
+    width: 0;
+    height: 0;
+    background-image: none;
+}
+main .container .inner-card .info-card.hide-info > span {
+    opacity: 0;
+    /* display: none; */
+    white-space: nowrap;
+}
+main .container .inner-card .info-card > span {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    transition: opacity .1s;
+    opacity: 1; 
+}
+main .container .inner-card .info-card span:not(:last-of-type) {
+    padding: .5rem 0;
+}
+
